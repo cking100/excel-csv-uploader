@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Upload Excel, CSV, or Image File</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+
+{% if image_url %}
+    <h2>Uploaded Image</h2>
+    <img src="{{ image_url }}" alt="Uploaded Image" style="max-width: 100%; height: auto;">
+{% elif data %}
+    <h2>Uploaded Data</h2>
+    <div>{{ data|safe }}</div>
+{% elif error %}
+    <h2 style="color: red;">{{ error }}</h2>
+{% endif %}
+{% endblock %}
